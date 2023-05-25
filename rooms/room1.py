@@ -22,12 +22,12 @@ def room1(win, inventory):
   user.draw(win)
 
 # drawing inventory label
-  inventLabel = Text(Point(5, 19), "inventario")
+  inventLabel = Text(Point(5, 19), "Inventario")
   inventLabel.setStyle("bold")
   inventLabel.draw(win)
 
 # drawing a button that says that a person can put an item into inventory by pressing g
-  get_item = Button(win, Point(5,2), 8, 2, "Get Item by Pressing <g>")
+  get_item = Button(win, Point(5,2), 8, 2, "Toma el objeto presionando <g>")
 
 # drawing inventory items
   inventoryTexts = []
@@ -92,7 +92,7 @@ def room1(win, inventory):
       # checks that if user tries to go through the 
       # left door, he/she dies
       if usx == Point(10.0, 7.0).getX() and usy == Point(10.0, 7.0).getY():
-        storytell(win,"The thief went into the living room and the dog got woken up and barked till the neighbours came. You loose! The thief got arrested.")
+        storytell(win,"El ladrón entró en la sala de estar y el perro se despertó y ladró hasta que llegaron los vecinos. ¡Pierdes! El ladrón fue arrestado.")
         continueGame = False
         lost = True
 
@@ -101,7 +101,7 @@ def room1(win, inventory):
           # checking if a user has essential item
           if main_item in inventory:
               # delete the room picture on the screen
-              storytell(win,"Good job! You passed the first room with the help of the vela in your inventory! Now it’s time for the next room. ")
+              storytell(win,"¡Buen trabajo! ¡Pasaste la primera habitación con la ayuda de la vela en tu inventario! Ahora es el momento de la siguiente habitación. ")
               user.undraw()
               img1.undraw()
               for i in inventoryTexts:
