@@ -50,7 +50,7 @@ def room1(win, inventory):
         "Trata de escapar")
   storytell(win, "Te puedes mover con las flechas")
   storytell(win,
-        " ")
+        "Avanza a traves de las salas resolviendo problemas numericos")
   storytell(win, "")
 
 
