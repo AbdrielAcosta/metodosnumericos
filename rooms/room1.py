@@ -110,7 +110,7 @@ def room1(win, inventory):
               # and return the state
               return True, False, inventory
           else:
-              storytell(win,"The stairs were too dark and the thief fell down, opened his head and layed unconscious until the owners came back. Next, he was arrested.")
+              storytell(win,"Las escaleras estaban demasiado oscuras y el ladrón se cayó, abrió la cabeza y quedó inconsciente hasta que los dueños regresaron. Luego, fue arrestado.")
               return False, True, inventory
 
 
