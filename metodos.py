@@ -2,6 +2,7 @@ import numpy as np
 import sympy as sp
 import random
 import math
+import matplotlib.pyplot as plt
 
 
 # Método generar función
@@ -314,3 +315,196 @@ def s38():
         integracion = integracion * h / 3
 
         print("%0.6f" % (integracion))
+
+
+#jacobi 10
+
+def jacobi(n):
+    def generate_jacobi_problem(n):
+    # Generar una matriz diagonal aleatoria
+     diagonal = np.random.rand(n)
+     A = np.diag(diagonal)
+
+    # Generar una matriz aleatoria 
+    B = np.random.rand(n, n)
+
+    # Asegurarse de que la matriz de coeficientes sea diagonalmente dominante
+    np.fill_diagonal(B, 0)  # Establecer los elementos de la diagonal en cero
+    row_sums = np.sum(np.abs(B), axis=1)
+    np.fill_diagonal(B, row_sums + 1)
+
+    # Generar un vecto
+    x = np.random.rand(n)
+
+    # Calcular el vector
+    b = np.dot(A, x)
+
+    return A, B, b, x
+
+        # definir el problema
+n = 5
+A, B, b, x = jacobi(n)
+
+#lagrange 10
+
+def lagrange():
+    import numpy as np
+
+def generate_lagrange_problem(n):
+    # Generar valores aleatorios para los puntos x y las funciones f(x)
+    x = np.random.rand(n)
+    f = np.random.rand(n)
+
+    # Calcular el polinomio de Lagrange
+    def lagrange_polynomial(xi):
+        result = 0
+        for j in range(n):
+            term = f[j]
+            for k in range(n):
+                if k != j:
+                    term *= (xi - x[k]) / (x[j] - x[k])
+            result += term
+        return result
+
+    # Generar una función aleatoria para evaluar
+    target_x = np.random.rand()
+    target_f = lagrange_polynomial(target_x)
+
+    # Mostrar el problema generado
+    print("Problema de Lagrange:")
+    print("Puntos:")
+    for i in range(n):
+        print("x{} = {}, f{} = {}".format(i+1, x[i], i+1, f[i]))
+    print("Evaluar en x = ?, f(x) = ?")
+    print("x = {}".format(target_x))
+    print("f(x) = ? (Valor objetivo)")
+
+    return x, f, target_x, target_f
+
+# Generar un problema de lagrange
+x, f, target_x, target_f = generate_lagrange_problem(5)
+
+def newtondfd(x,y):
+    n = len(x)
+    coefficients = np.zeros((n, n))
+    coefficients[:, 0] = y
+    
+    for j in range(1, n):
+        for i in range(n - j):
+            coefficients[i][j] = (coefficients[i+1][j-1] - coefficients[i][j-1]) / (x[i+j] - x[i])
+
+    return coefficients[0]
+
+def newton_interpolation(x, y):
+    coefficients = newtondfd(x, y)
+    n = len(x)
+    def polynomial(t):
+        result = coefficients[-1]
+        for i in range(n - 2, -1, -1):
+            result = result * (t - x[i]) + coefficients[i]
+        return result
+    return polynomial
+
+# Generar datos aleatorios
+num_points = np.random.randint(5, 10)
+x = np.sort(np.random.uniform(-10, 10, num_points))
+y = np.random.uniform(-10, 10, num_points)
+
+# Resolver el problema de interpolación
+polynomial = newton_interpolation(x, y)
+
+# Graficar los puntos y el polinomio interpolante
+t = np.linspace(x[0], x[-1], 100)
+plt.scatter(x, y, color='red', label='Datos')
+plt.plot(t, polynomial(t), color='blue', label='Polinomio Interpolante')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.legend()
+plt.title('Interpolación de Newton con Diferencias Divididas')
+plt.grid(True)
+plt.show()
+
+
+#newton hacia adelante 12
+
+def generar_datos_aleatorios(n):
+    # Generar valores aleatorios para x y f(x)
+    datos = []
+    for _ in range(n):
+        x = random.uniform(0, 1)  # Valor aleatorio para x en el rango [0, 1]
+        fx = random.uniform(-100, 100)  # Valor aleatorio para f(x) en el rango [-100, 100]
+        datos.append((x, fx))
+    return datos
+
+def diferenciacion_newton_adelante(datos):
+    n = len(datos)
+    h = datos[1][0] - datos[0][0]  # Intervalo de diferencia (espaciado uniforme)
+    
+    # Calcular diferencias divididas
+    diferencias_divididas = [[datos[i][1] for i in range(n)]]
+    for i in range(1, n):
+        diferencias_divididas.append([])
+        for j in range(n - i):
+            diferencia = (diferencias_divididas[i - 1][j + 1] - diferencias_divididas[i - 1][j])
+            diferencia /= (datos[j + i][0] - datos[j][0])
+            diferencias_divididas[i].append(diferencia)
+    
+    # Calcular derivada aproximada
+    derivada_aproximada = diferencias_divididas[0][0]
+    
+    return derivada_aproximada
+
+# Generar datos aleatorios
+datos_aleatorios = generar_datos_aleatorios(5)  # Cambia el número de datos si lo deseas
+
+# Calcular la derivada aproximada
+derivada_aproximada = diferenciacion_newton_adelante(datos_aleatorios)
+
+# Imprimir resultados
+print("Datos:")
+for dato in datos_aleatorios:
+    print(f"x = {dato[0]}, f(x) = {dato[1]}")
+print("Derivada aproximada:", derivada_aproximada)
+
+#newton atras 13
+
+def newtonatras():
+            import random
+
+def newton_hacia_atras(valores_iniciales, n):
+    # Generar valores aleatorios para la función y sus derivadas
+    funcion = [random.uniform(-10, 10) for _ in range(n)]
+    derivadas = [[random.uniform(-10, 10) for _ in range(n-i)] for i in range(n)]
+
+    # Imprimir los valores generados
+    print("Función:", funcion)
+    print("Derivadas:")
+    for i in range(n):
+        print(f"  Derivada {i+1}: {derivadas[i]}")
+
+    # Calcular los valores de Newton hacia atrás
+    valores = valores_iniciales.copy()
+    for i in range(n):
+        suma = 0
+        for j in range(i+1):
+            producto = 1
+            for k in range(j):
+                producto *= (valores_iniciales[i] - k)
+            suma += derivadas[i][j] * producto
+        valores[i] = funcion[i] - suma
+
+    # Imprimir los resultados
+    print("Valores de Newton hacia atrás:")
+    for i in range(n):
+        print(f"  Valor {i+1}: {valores[i]}")
+
+# Generar valores iniciales aleatorios
+valores_iniciales = [random.uniform(-10, 10) for _ in range(5)]
+
+# Definir la cantidad de pasos de Newton hacia atrás
+n = 5
+
+# Ejecutar el método de Newton hacia atrás
+newton_hacia_atras(valores_iniciales, n)
+
+
