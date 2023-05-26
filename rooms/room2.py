@@ -65,7 +65,7 @@ def room2(win, inventory):
   img2.draw(win)
 
   # drawing user
-  user = Image(Point(28,1), "rooms/thief.png")
+  user = Image(Point(28,1), "rooms/thief.gif")
   user.draw(win)
 
   # drawing inventory label
