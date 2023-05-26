@@ -21,14 +21,14 @@ def room5(win, inventory):
     user.draw(win)
 
     # drawing inventory label
-    inventLabel = Text(Point(5, 19), "Inventory")
+    inventLabel = Text(Point(5, 19), "Inventario")
     inventLabel.setStyle("bold")
     inventLabel.draw(win)
 
     # drawing a button that says that a person can put an item into inventory by pressing g
-    get_item = Button(win, Point(5, 2), 8, 2, "Get Item by Pressing <g>")
+    get_item = Button(win, Point(5, 2), 8, 2, "Tomar el objeto <G>")
     # drawing a button that says that a person can observe a place by pressing o
-    observe = Button(win, Point(5, 5), 8, 2, "Observe by Pressing <o>")
+    observe = Button(win, Point(5, 5), 8, 2, "Observar <O>")
 
     # drawing inventory items
     inventoryTexts = []
@@ -44,12 +44,12 @@ def room5(win, inventory):
     main_item = 'keys'
 
     # things_in_room is a list of items present in that room. (only one of them is necessary)
-    things_in_room = {"Point(26.0,15.0)": "Lamp"}
-    observe_in_room = {"Point(20.0,8.0)": "Treasure box"}
+    things_in_room = {"Point(26.0,15.0)": "Lámpara"}
+    observe_in_room = {"Point(20.0,8.0)": "Cofre del tesoro"}
 
 
     # storytell before the room begins
-    storytell(win, "This must be it!! I see the safe and a treasure box. This is AMAZING!!")
+    storytell(win, "¡¡Esto debe ser todo!! Veo la caja fuerte y una caja del tesoro. ¡Esto es INCREÍBLE!!")
   
     while continueGame is True and lost is False:
 
@@ -104,7 +104,7 @@ def room5(win, inventory):
             # checking if a user has essential item
         if test_passed and main_item in inventory:
             # delete the room picture on the screen
-            storytell(win, "You had collected the keys in the second room so you were able to open the treasure box. Congrats!")
+            storytell(win, "Habías recogido las llaves en la segunda habitación para poder abrir la caja del tesoro. ¡Felicidades!")
             inventLabel.undraw()
             user.undraw()
             img5.undraw()
@@ -116,6 +116,6 @@ def room5(win, inventory):
             return False, False, inventory
         if test_passed and main_item not in inventory:
             inventLabel.undraw()
-            storytell(win, "You forgot that you needed an important item from one of the rooms so you lost.")
+            storytell(win, "Olvidaste que necesitabas un artículo importante de una de las habitaciones, así que perdiste.")
             return False, True, inventory
     return continueGame, lost, inventory
