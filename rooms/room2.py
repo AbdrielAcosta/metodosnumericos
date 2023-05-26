@@ -1,6 +1,9 @@
 # room2.py
 # The function draws and activates a room2
 import sys
+
+import main
+
 sys.path.append("..")
 from graphics import *
 from button import Button
@@ -8,7 +11,7 @@ from widgets import storytell, test_code
 import math
 import random
 import sympy as sp
-
+import a1
 
 def generar_funcion():
     grado = random.randint(1, 3)
@@ -157,8 +160,15 @@ def room2(win, inventory):
               # and return the state
               return True, False, inventory
           else:
+              cont = 0
+              while (cont == 0):
+                  numrand = a1.rand()
+                  if (numrand not in main.nMetodo):
+                      metodo = a1.filt(numrand)
+                      main.nMetodo.append(numrand)
+                      cont += 1
               print(str(solucion))
-              storytell(win, "Resuelve la siguiente funcion por bisectriz")
+              storytell(win, "Resuelve la siguiente funcion por" + metodo)
               observed = test_code(win, funcion_aleatoria, str(solucion))
               if observed:
                 storytell(win, "Correcto, no olvidas nada.")

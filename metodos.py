@@ -345,7 +345,7 @@ def jacobi(n):
 n = 5
 A, B, b, x = jacobi(n)
 
-#lagrange 10
+#lagrange 11
 
 def lagrange():
     import numpy as np

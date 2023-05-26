@@ -5,6 +5,7 @@ sys.path.append("..")
 from graphics import *
 from button import Button
 from widgets import storytell
+import a1
 import time
 
 def room1(win, inventory):
