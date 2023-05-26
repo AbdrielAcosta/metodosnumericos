@@ -69,7 +69,7 @@ def room2(win, inventory):
   user.draw(win)
 
   # drawing inventory label
-  inventLabel = Text(Point(5, 19), "")
+  inventLabel = Text(Point(5, 19), "Inventario")
   inventLabel.setStyle("bold")
   inventLabel.draw(win)
 
