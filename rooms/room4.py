@@ -21,14 +21,14 @@ def room4(win, inventory):
     user.draw(win)
 
     # drawing inventory label
-    inventLabel = Text(Point(5, 19), "Inventory")
+    inventLabel = Text(Point(5, 19), "Inventario")
     inventLabel.setStyle("bold")
     inventLabel.draw(win)
 
     # drawing a button that says that a person can put an item into inventory by pressing g
-    get_item = Button(win, Point(5, 2), 8, 2, "Get Item by Pressing <g>")
+    get_item = Button(win, Point(5, 2), 8, 2, "Tomar el objeto <G>")
     # drawing a button that says that a person can observe a place by pressing o
-    observe = Button(win, Point(5, 5), 8, 2, "Observe by Pressing <o>")
+    observe = Button(win, Point(5, 5), 8, 2, "Observar <O>")
 
     # drawing inventory items
     inventoryTexts = []
@@ -44,12 +44,12 @@ def room4(win, inventory):
     main_item = 'remote control'
 
     # things_in_room is a list of items present in that room. (only one of them is necessary)
-    things_in_room = {"Point(19.0,6.0)": "remote control"}
-    observe_in_room = {"Point(21.0,14.0)": "Screen says: 'Can you answer how many months have 28 days?'"}
+    things_in_room = {"Point(19.0,6.0)": "Control remoto"}
+    observe_in_room = {"Point(21.0,14.0)": "La pantalla dice: '¿Puedes responder cuántos meses tienen 28 días?'"}
 
 
   # storytell before the room begins
-    storytell(win, "What kind of room is this? Rich people are weird… maybe the tv has something?")
+    storytell(win, "¿Qué tipo de habitación es esta? Los ricos son raros ... ¿Tal vez la televisión tiene algo?")
     while continueGame is True and lost is False:
 
         # ask for key input (arrows)
@@ -103,7 +103,7 @@ def room4(win, inventory):
             # checking if a user has essential item
         if test_passed and main_item in inventory:
             # delete the room picture on the screen
-            storytell(win,"Good Job! You passed the fourth room because the riddle you solved activated the remote control and you were able to unlock a hidden door under the bed.")
+            storytell(win,"¡Buen trabajo! Pasaste por la cuarta habitación porque el acertijo que resolviste activó el control remoto y pudiste desbloquear una puerta oculta debajo de la cama.")
             user.undraw()
             img4.undraw()
             for i in inventoryTexts:
