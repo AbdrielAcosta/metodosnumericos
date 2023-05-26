@@ -508,3 +508,264 @@ n = 5
 newton_hacia_atras(valores_iniciales, n)
 
 
+import random
+
+def f(x, y):
+    """Función diferencial dy/dx"""
+    return x * y
+
+def runge_kutta(h, x0, y0, n):
+    """Implementación del método de Runge-Kutta de segundo orden"""
+    print(f"n\tx\ty")
+    print("-"*25)
+
+    for i in range(n):
+        k1 = h * f(x0, y0)
+        k2 = h * f(x0 + h, y0 + k1)
+        y1 = y0 + 0.5 * (k1 + k2)
+        x1 = x0 + h
+
+        print(f"{i+1}\t{x1}\t{y1}")
+
+        x0 = x1
+        y0 = y1
+
+# Valores aleatorios
+h = random.uniform(0.1, 0.5)
+x0 = random.uniform(0, 5)
+y0 = random.uniform(0, 5)
+n = random.randint(5, 10)
+
+runge_kutta(h, x0, y0, n)
+
+runge kutta segundo orden 
+
+import numpy as np
+
+def f(t, y):
+    # Función f(t, y) del problema de valor inicial
+    return t * y  # Ejemplo: dy/dt = t * y
+
+def runge_kutta(t0, y0, h, num_steps):
+    # Inicializar arrays para almacenar los resultados
+    t = np.zeros(num_steps+1)
+    y = np.zeros(num_steps+1)
+    
+    # Asignar condiciones iniciales
+    t[0] = t0
+    y[0] = y0
+    
+    # Implementar el método de Runge-Kutta
+    for i in range(num_steps):
+        k1 = h * f(t[i], y[i])
+        k2 = h * f(t[i] + h/2, y[i] + k1/2)
+        y[i+1] = y[i] + k2
+        t[i+1] = t[i] + h
+    
+    return t, y
+
+# Valores aleatorios para el problema
+t0 = 0  # Valor inicial de t
+y0 = np.random.rand()  # Valor inicial de y (aleatorio)
+h = 0.1  # Tamaño del paso
+num_steps = 10  # Número de pasos
+
+# Llamar a la función de Runge-Kutta
+t, y = runge_kutta(t0, y0, h, num_steps)
+
+# Imprimir los resultados
+for i in range(num_steps+1):
+    print(f"t = {t[i]}, y = {y[i]}")
+
+runge kutta
+
+euler modificado
+
+import random
+
+def euler_modificado(f, x0, y0, h, n):
+    x = x0
+    y = y0
+    
+    for i in range(n):
+        k1 = h * f(x, y)
+        k2 = h * f(x + h/2, y + k1/2)
+        y = y + k2
+        x = x + h
+    
+    return y
+
+# Función de prueba: dy/dx = x + y
+def f(x, y):
+    return x + y
+
+# Valores iniciales
+x0 = random.uniform(0, 1)
+y0 = random.uniform(0, 1)
+
+# Paso y número de iteraciones
+h = random.uniform(0.01, 0.1)
+n = random.randint(10, 20)
+
+# Calcula el resultado
+resultado = euler_modificado(f, x0, y0, h, n)
+
+# Imprime los resultados
+print("Valores iniciales:")
+print("x0 =", x0)
+print("y0 =", y0)
+print("Paso y número de iteraciones:")
+print("h =", h)
+print("n =", n)
+print("Resultado:")
+print("y(x) =", resultado)
+
+runge kutta orden superior
+
+import random
+
+def f(t, y):
+    """Función que define la ecuación diferencial dy/dt = f(t, y)"""
+    return y**2 - t
+
+def runge_kutta(f, a, b, h, y0):
+    """Implementación del método de Runge-Kutta de orden superior"""
+    t_values = []
+    y_values = []
+
+    t = a
+    y = y0
+
+    while t <= b:
+        t_values.append(t)
+        y_values.append(y)
+
+        k1 = h * f(t, y)
+        k2 = h * f(t + h/2, y + k1/2)
+        k3 = h * f(t + h/2, y + k2/2)
+        k4 = h * f(t + h, y + k3)
+
+        y += (k1 + 2*k2 + 2*k3 + k4) / 6
+        t += h
+
+    return t_values, y_values
+
+# Valores iniciales
+a = 0
+b = 1
+h = 0.1
+y0 = random.uniform(-1, 1)  # Valor inicial aleatorio entre -1 y 1
+
+# Resolver la ecuación diferencial utilizando Runge-Kutta
+t_values, y_values = runge_kutta(f, a, b, h, y0)
+
+# Imprimir los resultados
+for t, y in zip(t_values, y_values):
+    print(f"t = {t:.2f}, y = {y:.4f}")
+    
+    
+
+runge kutta tercer orden
+
+import random
+
+def f(x, y):
+    return 2 * x - y
+
+def runge_kutta_third_order(x0, y0, h, num_steps):
+    print("Iteración 0: x =", x0, "y =", y0)
+    for i in range(1, num_steps + 1):
+        k1 = h * f(x0, y0)
+        k2 = h * f(x0 + h/2, y0 + k1/2)
+        k3 = h * f(x0 + h, y0 - k1 + 2*k2)
+        
+        y1 = y0 + (k1 + 4*k2 + k3) / 6
+        x1 = x0 + h
+        
+        print("Iteración", i, ": x =", x1, "y =", y1)
+        
+        x0, y0 = x1, y1
+
+# Valores aleatorios
+x0 = random.uniform(0, 1)
+y0 = random.uniform(0, 1)
+h = random.uniform(0.1, 0.5)
+num_steps = random.randint(5, 10)
+
+runge_kutta_third_order(x0, y0, h, num_steps)
+
+cuadrática cúbica
+
+import numpy as np
+
+def generar_problema_aleatorio():
+    # Generar coeficientes aleatorios para la función cuadrática
+    a = np.random.randint(-10, 10)
+    b = np.random.randint(-10, 10)
+    c = np.random.randint(-10, 10)
+
+    # Generar valor inicial aleatorio para la raíz
+    x0 = np.random.randint(-10, 10)
+
+    return a, b, c, x0
+
+def cuadratica_cubica(a, b, c, x0, tolerancia=1e-6, max_iter=100):
+    x = x0
+    iteracion = 0
+
+    while iteracion < max_iter:
+        f = a * x**2 + b * x + c
+        fp = 2 * a * x + b
+        fpp = 2 * a
+
+        # Actualizar la raíz utilizando el método de cuadrática cúbica
+        x = x - (f * fp) / (fp**2 - f * fpp)
+
+        # Comprobar si se ha alcanzado la tolerancia
+        if abs(f) < tolerancia:
+            break
+
+        iteracion += 1
+
+    return x
+
+# Generar un problema aleatorio
+a, b, c, x0 = generar_problema_aleatorio()
+
+# Resolver el problema utilizando cuadrática cúbica
+raiz = cuadratica_cubica(a, b, c, x0)
+
+# Imprimir los resultados
+print("Coeficientes de la función cuadrática:")
+print(f"a = {a}, b = {b}, c = {c}")
+print("Valor inicial para la raíz: x0 =", x0)
+print("Raíz encontrada:", raiz)
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Generar datos aleatorios para la línea recta
+m_true = np.random.uniform(-10, 10)  # Pendiente aleatoria
+b_true = np.random.uniform(-50, 50)  # Intercepto aleatorio
+
+# Generar datos aleatorios para el problema numérico
+x = np.random.uniform(-100, 100, 100)  # Valores de x aleatorios
+noise = np.random.normal(0, 20, 100)  # Ruido aleatorio
+y = m_true * x + b_true + noise  # Valores de y generados por la línea recta con ruido
+
+# Resolver el problema utilizando una línea recta
+m = np.sum((x - np.mean(x)) * (y - np.mean(y))) / np.sum((x - np.mean(x)) ** 2)  # Pendiente estimada
+b = np.mean(y) - m * np.mean(x)  # Intercepto estimado
+
+# Graficar los datos y la línea recta estimada
+plt.scatter(x, y, label='Datos')
+plt.plot(x, m * x + b, color='red', label='Línea Recta Estimada')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.legend()
+plt.title('Problema de Métodos Numéricos Resuelto por Línea Recta')
+plt.show()
+
+
+
