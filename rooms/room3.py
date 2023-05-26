@@ -21,14 +21,14 @@ def room3(win, inventory):
     user.draw(win)
   
   # drawing inventory label
-    inventLabel = Text(Point(5, 19), "Inventory")
+    inventLabel = Text(Point(5, 19), "Inventario")
     inventLabel.setStyle("bold")
     inventLabel.draw(win)
 
   # drawing a button that says that a person can put an item into inventory by pressing g
-    get_item = Button(win, Point(5,2), 8, 2, "Get Item by Pressing <g>")
+    get_item = Button(win, Point(5,2), 8, 2, "Tomar el objeto <G>")
   # drawing a button that says that a person can observe a place by pressing o
-    observe = Button(win, Point(5, 5), 8, 2, "Observe by Pressing <o>")
+    observe = Button(win, Point(5, 5), 8, 2, "Observar <O>")
 
   # drawing inventory items
     inventoryTexts = []
@@ -40,16 +40,16 @@ def room3(win, inventory):
         x.draw(win)
 
     # observed is what a user needs to proceed to the next level
-    main_item = "cake"
+    main_item = "Pastel"
   
   #set the points of the items
-    things_in_room = {"Point(12.0,11.0)": "cake", "Point(17.0,14.0)": "towel"}
-    observe_in_room = {"Point(22.0,15.0)": "Mom, the piece of the puzzle is hidden in the kitchen! It should be a piece of cake. Be careful when opening the fridge, it’s extremely cold!"}
+    things_in_room = {"Point(12.0,11.0)": "Pastel", "Point(17.0,14.0)": "Toalla"}
+    observe_in_room = {"Point(22.0,15.0)": "¡Mamá, la pieza del rompecabezas está escondida en la cocina! Debería ser pan comido. Ten cuidado al abrir la nevera, ¡hace mucho frío!"}
 
 
     # storytell
   # storytelling the beginning of room3
-    storytell(win,"The kitchen! This is making me hungry... I wish I could sit down but I have to keep going because I don't have much time left! What could possibly be the hidden piece in this room? I see a fridge, a glass of milk, a cup of tea, a TV... mmm")
+    storytell(win,"¡La cocina! Esto me está dando hambre ... ¡Ojalá pudiera sentarme, pero tengo que seguir adelante porque no me queda mucho tiempo! ¿Cuál podría ser la pieza oculta en esta habitación? Veo una nevera, un vaso de leche, una taza de té, un televisor... Mmm")
     while continueGame is True and lost is False:
         # ask for key input (arrows)
         k = win.getKey()
@@ -68,9 +68,9 @@ def room3(win, inventory):
         # key for getting an item
         if k == 'G' or k == 'g':
             if get_item.active:
-                if item == 'cake':
-                    if "towel" not in inventory:
-                        storytell(win, "The fridge was so cold that your hand got stuck to its doorknob and the thief got caugth.")
+                if item == 'Pastel':
+                    if "Toalla" not in inventory:
+                        storytell(win, "La nevera estaba tan fría que tu mano se pegó a su pomo de la puerta y el ladrón fue atrapado.")
                         return False, True, inventory
                 inventory.append(item)
                 inventoryTexts.append(Text(Point(5, last), item))
@@ -81,7 +81,7 @@ def room3(win, inventory):
         if k == 'O' or k == 'o':
             if observe.active:
                 storytell(win, observed_display)
-                storytell(win, "Hmm… what does she mean by that? Maybe I should look for something to open the fridge with. Don’t wanna risk getting caught…")
+                storytell(win, "Hmm... ¿Qué quiere decir con eso? Tal vez debería buscar algo para abrir la nevera. No quiero arriesgarme a ser atrapado ...")
                 observed = True
 
         # Getting user location
@@ -107,7 +107,7 @@ def room3(win, inventory):
         # checking if a user has essential item
         if main_item in inventory:
             # delete the room picture on the screen
-            storytell(win,"Good Job! You passed the third room because you figured out that you would need a towel to open the fridge, and you also got the 'cake' mentioned in hint.")
+            storytell(win,"¡Buen trabajo! Pasaste por la tercera habitación porque te diste cuenta de que necesitarías una toalla para abrir la nevera, y también obtuviste el "pastel" mencionado en la pista.")
             user.undraw()
             img3.undraw()
             for i in inventoryTexts:
