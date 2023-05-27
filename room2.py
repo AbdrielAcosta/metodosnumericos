@@ -122,9 +122,10 @@ def room2(win, inventory):
                         metodo = a1.filt(numrand)
                         jo.nMetodo.append(numrand)
                         cont += 1
-                print(str(a1.resolucion(numrand)))
+                print(a1.resolucion(numrand))
                 storytell(win, "Resuelve la siguiente funcion por" + metodo)
-                observed = test_code(win, a1.problema(numrand), str(a1.resolucion(numrand)))
+                observed = test_code(win, a1.problema(numrand) ,str(a1.resolucion(numrand)))
+                print(str(a1.problema(numrand)))
                 if observed:
                     storytell(win, "Correcto, no olvidas nada.")
 

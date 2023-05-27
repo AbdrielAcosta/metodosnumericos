@@ -6,7 +6,7 @@ from widgets import storytell
 from play import play
 import time
 
-# 
+ 
 def clear(win):
     for item in win.items[:]:
         item.undraw()

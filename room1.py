@@ -40,7 +40,7 @@ def room1(win, inventory):
 
   # setting up the key items for the room and what can be collected
   main_item = 'vela'
-  things_in_room = {"Point(21.0,11.0)": "vela", "Point(28.0,3.0)": "vela", "Point(12.0,2.0)": "plant"}
+  things_in_room = {"Point(25.0,12.0)": "vela",  "Point(12.0,2.0)": "plant"}
 
 # storytell
 
@@ -59,9 +59,9 @@ def room1(win, inventory):
 
       k = win.getKey()
      
-      if k == "Right" and user.getAnchor().getX() != 30:
+      if k == "Right" and user.getAnchor().getX() != 32:
           user.move(1, 0)
-      if k == "Left" and user.getAnchor().getX() != 10:
+      if k == "Left" and user.getAnchor().getX() != 14:
           user.move(-1, 0)
       if k == "Up" and user.getAnchor().getY() != 20:
           user.move(0, 1)

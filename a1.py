@@ -2,7 +2,7 @@ import random
 import numpy as np
 from scipy.optimize import fsolve
 def rand():
-    n = random.randint(1,32)
+    n = random.randint(1,15)
     return n
 """
  n = 1-5 interp lineal
@@ -115,13 +115,13 @@ def filt(n):
 def problema(n):
     print("Problema: ")
     if n <= 5:
-        xs = np.array([1, 2, 3, 4, 5, 6])
-        ys = np.array([3, 5, 4, 6, 8, 10])
-        x_interp = np.array([1.5, 2.5, 3.5, 4.5, 5.5])
+        xs = np.array([1, 2, 3, 4, 5])
+        ys = np.array([3, 5, 4, 6, 8])
+        x_interp = np.array([1.5, 2.5, 3.5, 4.5, 4.7])
         print(f"   x    |    y   ")
         print("-----------------------------")
-        for x, y in xs, ys:
-            print(f"  {x:.1f}  |  {y:.2f}")
+        for x in xs:
+            print(f"  {xs[x-1]:.1f}  |  {ys[x-1]:.2f}")
         print("En el punto: %.2f de x." % x_interp[n])
     elif n <= 10:
         if n==6:
@@ -146,30 +146,35 @@ def problema(n):
         if n == 15:
             print("x - 2y + 3z = 5, 2x + y - z = 4, 3x - y + 2z = 7")
     elif n <= 20:
-
+        a = 0
     elif n <= 28:
-
+        a=0
     else:
+        a=0
 
+        return problema
 def resolucion(n):
     resultado = 0
     if n <= 5:
-        xs = np.array([1, 2, 3, 4, 5, 6])
-        ys = np.array([3, 5, 4, 6, 8, 10])
-        x_interp = np.array([1.5, 2.5, 3.5, 4.5, 5.5])
+        xs = np.array([1, 2, 3, 4, 5])
+        ys = np.array([3, 5, 4, 6, 8])
+        x_interp = np.array([1.5, 2.5, 3.5, 4.5, 4.7])
         resultado = np.interp(x_interp[n], xs, ys)
     elif n <= 10:
-        if n==6:
-            ec = n**2 - 4*n + 4
-        elif n==7:
-            ec = 2**n -5
-        elif n==8:
-            ec = np.sin(n) - np.cos(n)
-        elif n==9:
-            ec = np.log(n) - 2
-        else:
-            ec = n * np.sin(n) - 1
-        res = fsolve(ec,0)
+        def ec(x):
+            if n == 6:
+                y = x**2 - 4*x + 4
+            elif n == 7:
+                y = 2**x - 5
+            elif n == 8:
+                y = np.sin(x) - np.cos(x)
+            elif n == 9:
+                y = np.log(x) - 2
+            else:
+                y = x * np.sin(x)-1
+            return y
+
+        res = fsolve(ec, 0)
         resultado = res[0]
     elif n <= 15:
         if n == 11:
