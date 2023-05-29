@@ -5,6 +5,9 @@ sys.path.append("..")
 from graphics import *
 from button import Button
 from widgets import storytell
+import a1
+import jo
+from widgets import test_code
 
 def room3(win, inventory):
 
@@ -92,8 +95,22 @@ def room3(win, inventory):
         
       # Activating a pickup button if the user is standing on an item that they can pick up
         if user_pos in things_in_room.keys() and things_in_room[user_pos] not in inventory:
-            item = things_in_room[user_pos]
-            get_item.activate()
+            cont = 0
+            while (cont == 0):
+                numrand = a1.rand()
+                if (numrand not in jo.nMetodo):
+                    metodo = a1.filt(numrand)
+                    jo.nMetodo.append(numrand)
+                    cont += 1
+            print(str(a1.resolucion(numrand)))
+            storytell(win, "Resuelve la siguiente funcion por" + metodo)
+            observed = test_code(win, str(a1.problema(numrand)), str(a1.resolucion(numrand)))
+            if observed:
+                storytell(win, "Correcto, no olvidas nada.")
+                item = things_in_room[user_pos]
+                get_item.activate()
+            else:
+                continueGame = False
         else:
             get_item.deactivate()
 
@@ -107,7 +124,7 @@ def room3(win, inventory):
         # checking if a user has essential item
         if main_item in inventory:
             # delete the room picture on the screen
-            storytell(win,"¡Buen trabajo! Pasaste por la tercera habitación porque te diste cuenta de que necesitarías una toalla para abrir la nevera, y también obtuviste el "pastel" mencionado en la pista.")
+            storytell(win,"¡Buen trabajo! Pasaste por la tercera habitación porque te diste cuenta de que necesitarías una toalla para abrir la nevera, y también obtuviste el 'pastel' mencionado en la pista.")
             user.undraw()
             img3.undraw()
             for i in inventoryTexts:
