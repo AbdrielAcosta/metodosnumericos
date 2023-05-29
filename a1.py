@@ -122,7 +122,7 @@ def problema(n):
         print("-----------------------------")
         for x in xs:
             print(f"  {xs[x-1]:.1f}  |  {ys[x-1]:.2f}")
-        print("En el punto: %.2f de x." % x_interp[n])
+        print("En el punto: %.2f de x." % x_interp[n-1])
     elif n <= 10:
         if n==6:
             print("x^2 - 4x + 4")
@@ -131,7 +131,7 @@ def problema(n):
         elif n==8:
             print("sin(x) - cos(x)")
         elif n==9:
-            print("log(x) - 2")
+            print("-cos(x) + 3sin(x)")
         else:
             print("xsin(x) - 1")
     elif n <= 15:
@@ -159,7 +159,7 @@ def resolucion(n):
         xs = np.array([1, 2, 3, 4, 5])
         ys = np.array([3, 5, 4, 6, 8])
         x_interp = np.array([1.5, 2.5, 3.5, 4.5, 4.7])
-        resultado = np.interp(x_interp[n], xs, ys)
+        resultado = np.interp(x_interp[n-1], xs, ys)
     elif n <= 10:
         def ec(x):
             if n == 6:
@@ -169,7 +169,7 @@ def resolucion(n):
             elif n == 8:
                 y = np.sin(x) - np.cos(x)
             elif n == 9:
-                y = np.log(x) - 2
+                y = - np.cos(x) + 3*np.sin(x)
             else:
                 y = x * np.sin(x)-1
             return y
