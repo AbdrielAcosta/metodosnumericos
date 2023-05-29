@@ -87,8 +87,22 @@ def room4(win, inventory):
 
         # Activating a pickup button if the user is standing on an item that they can pick up.
         if user_pos in things_in_room.keys() and things_in_room[user_pos] not in inventory:
-            item = things_in_room[user_pos]
-            get_item.activate()
+            cont = 0
+            while (cont == 0):
+                numrand = a1.rand()
+                if (numrand not in jo.nMetodo):
+                    metodo = a1.filt(numrand)
+                    jo.nMetodo.append(numrand)
+                    cont += 1
+            print(str(a1.resolucion(numrand)))
+            storytell(win, "Resuelve la siguiente funcion por" + metodo)
+            observed = test_code(win, str(a1.problema(numrand)), str(a1.resolucion(numrand)))
+            if observed:
+                storytell(win, "Correcto, no olvidas nada.")
+                item = things_in_room[user_pos]
+                get_item.activate()
+            else:
+                continueGame = False
         else:
             get_item.deactivate()
 
