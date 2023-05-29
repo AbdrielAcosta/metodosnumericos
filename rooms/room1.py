@@ -6,6 +6,9 @@ from graphics import *
 from button import Button
 from widgets import storytell
 import time
+import jo
+import a1
+from widgets import test_code
 
 def room1(win, inventory):
 
@@ -84,8 +87,22 @@ def room1(win, inventory):
       user_pos = "Point({0},{1})".format(usx, usy)
       # Activating a pickup button if the user is standing on a vela
       if user_pos in things_in_room.keys() and things_in_room[user_pos] not in inventory:
-          item = things_in_room[user_pos]
-          get_item.activate()
+          cont = 0
+          while (cont == 0):
+              numrand = a1.rand()
+              if (numrand not in jo.nMetodo):
+                  metodo = a1.filt(numrand)
+                  jo.nMetodo.append(numrand)
+                  cont += 1
+          print(str(a1.resolucion(numrand)))
+          storytell(win, "Resuelve la siguiente funcion por" + metodo)
+          observed = test_code(win, str(a1.problema(numrand)), str(a1.resolucion(numrand)))
+          if observed:
+              storytell(win, "Correcto, no olvidas nada.")
+              item = things_in_room[user_pos]
+              get_item.activate()
+          else:
+              continueGame = False
       else:
           get_item.deactivate()
         
